@@ -19,6 +19,12 @@
             <div class="container px-4 px-lg-5">
                 <div class="row gx-4 gx-lg-5 justify-content-center">
                     <div class="col-md-10 col-lg-8 col-xl-7">
+                        @if(isset($data))
+                            <p><strong>Name:</strong> {{ $data->name}}</p>
+                            <p><strong>Email:</strong> {{ $data->email}}</p>
+                            <p><strong>Phone:</strong> {{ $data->phone}}</p>
+                            <p><strong>Message:</strong> {{ $data->message}}</p>
+                        @else
                         <p>Want to get in touch? Fill out the form below to send me a message and I will get back to you as soon as possible!</p>
                         <div class="my-5">
                             <!-- * * * * * * * * * * * * * * *-->
@@ -28,7 +34,6 @@
                             <!-- To make this form functional, sign up at-->
                             <!-- https://startbootstrap.com/solution/contact-forms-->
                             <!-- to get an API token!-->
-
                             <form method="post">
                                 @csrf
                                 <div class="form-floating">
@@ -74,11 +79,13 @@
                                 <button class="btn btn-primary text-uppercase" id="submitButton" type="submit">Send</button>
                             </form>
                         </div>
+                        @endif
                     </div>
                 </div>
             </div>
         </main>
+@endsection
 @section('js')
         <script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>
 @endsection
-@endsection
+
