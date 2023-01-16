@@ -15,7 +15,7 @@ class BlogPostController extends Controller
     public function index()
     {
         $blogs = BlogPost::all();
-        return $blogs;
+        return view('blog.index', ['blogs'=>$blogs]);
         //return $blogs[0]->title;
     }
 
@@ -48,7 +48,8 @@ class BlogPostController extends Controller
      */
     public function show(BlogPost $blogPost)
     {
-        //
+           //select * from blog_posts where id = $blogPost" 
+        return $blogPost;
     }
 
     /**
