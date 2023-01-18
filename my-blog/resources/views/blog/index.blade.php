@@ -15,7 +15,7 @@
                         </p>
                     </div>
                     <div class="col-md-4">
-                        <a href="" class="btn btn-outline-primary">
+                        <a href="{{ route('blog.create')}}" class="btn btn-outline-primary">
                             Ajouter un article
                         </a>
                     </div>

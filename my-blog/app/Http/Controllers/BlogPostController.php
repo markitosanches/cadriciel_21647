@@ -26,7 +26,7 @@ class BlogPostController extends Controller
      */
     public function create()
     {
-        //
+        return view('blog.create');
     }
 
     /**
@@ -37,7 +37,16 @@ class BlogPostController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+            //insert -> lastid  => select where lastId
+            $newPost = BlogPost::create([
+                'title' => $request->title,
+                'body'  => $request->body,
+                'user_id' => 1
+            ]);
+
+            return redirect(route('blog.show', $newPost->id));
+
     }
 
     /**
@@ -49,7 +58,7 @@ class BlogPostController extends Controller
     public function show(BlogPost $blogPost)
     {
            //select * from blog_posts where id = $blogPost" 
-        return $blogPost;
+        return view('blog.show', ['blogPost' => $blogPost]);
     }
 
     /**
@@ -60,7 +69,7 @@ class BlogPostController extends Controller
      */
     public function edit(BlogPost $blogPost)
     {
-        //
+        return view('blog.edit', ['blogPost' => $blogPost]);
     }
 
     /**
@@ -72,7 +81,14 @@ class BlogPostController extends Controller
      */
     public function update(Request $request, BlogPost $blogPost)
     {
-        //
+        //update where blogPost->id  => select where blogPost->id
+        $blogPost->update([
+            'title' => $request->title,
+            'body' => $request->body
+        ]);
+
+        return redirect(route('blog.show', $blogPost->id));
+
     }
 
     /**
@@ -83,6 +99,8 @@ class BlogPostController extends Controller
      */
     public function destroy(BlogPost $blogPost)
     {
-        //
+        $blogPost->delete();
+
+        return redirect(route('blog.index'));
     }
 }
