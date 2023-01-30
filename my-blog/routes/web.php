@@ -29,3 +29,9 @@ Route::delete('blog-edit/{blogPost}', [BlogPostController::class, 'destroy']);
 //test eloquent
 Route::get('query', [BlogPostController::class, 'query']);
 Route::get('page', [BlogPostController::class, 'page']);
+
+use App\Http\Controllers\CustomAuthController;
+
+Route::get('registration', [CustomAuthController::class, 'create'])->name('user.create');
+Route::post('registration', [CustomAuthController::class, 'store'])->name('user.store');
+Route::get('login', [CustomAuthController::class, 'index'])->name('user.index');
