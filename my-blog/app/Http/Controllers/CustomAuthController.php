@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 
 class CustomAuthController extends Controller
 {
@@ -94,5 +96,43 @@ class CustomAuthController extends Controller
     public function destroy(User $user)
     {
         //
+    }
+
+    public function authentication(Request $request){
+        $request->validate([
+            'email'=> 'required|email|exists:users',
+            'password' => 'required|min:6|max:20'
+        ]);
+
+        $credentials = $request->only('email', 'password');
+
+        if(!Auth::validate($credentials)):
+            return redirect(route('login'))
+                      ->withErrors(trans('auth.failed'))
+                      ->withInput();
+         endif;
+
+         $user = Auth::getProvider()->retrieveByCredentials($credentials);
+     
+         Auth::login($user, $request->get('remember'));
+
+         return redirect()->intended('dashboard')->withSuccess('Signed in');
+    }
+
+    public function dashboard(){
+
+        $name = 'Guest';
+        if(Auth::check()){
+            $name = Auth::user()->name;
+        }
+
+        return view('dashboard', ['name' => $name]);
+    }
+
+    public function logout(){
+        Session::flush();
+        Auth::logout();
+
+        return redirect(route('login'));
     }
 }
