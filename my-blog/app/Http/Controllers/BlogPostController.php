@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\BlogPost;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 
 class BlogPostController extends Controller
 {
@@ -43,7 +44,7 @@ class BlogPostController extends Controller
             $newPost = BlogPost::create([
                 'title' => $request->title,
                 'body'  => $request->body,
-                'user_id' => 1
+                'user_id' => Auth::user()->id
             ]);
 
             return redirect(route('blog.show', $newPost->id));

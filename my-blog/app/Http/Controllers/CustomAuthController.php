@@ -121,12 +121,11 @@ class CustomAuthController extends Controller
 
     public function dashboard(){
 
-        $name = 'Guest';
+        
         if(Auth::check()){
-            $name = Auth::user()->name;
+           return view('dashboard'); 
         }
-
-        return view('dashboard', ['name' => $name]);
+        return redirect(route('login'))->withErrors('Vous n\'êtes pas autorisé à accéder');
     }
 
     public function logout(){
