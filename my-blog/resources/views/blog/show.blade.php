@@ -10,7 +10,8 @@
             </h4>
             <hr>
             <p> {!! $blogPost->body !!}</p>
-            <strong>Author: {{ $blogPost->blogHasUser->name}}</strong>
+            <p><strong>Category:</strong> {{ $blogPost->blogHasCategory->category}}</p>
+            <p><strong>Author:</strong> {{ $blogPost->blogHasUser->name}}</p>
             <hr>
         </div>
     </div>

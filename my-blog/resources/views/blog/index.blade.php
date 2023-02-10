@@ -5,7 +5,7 @@
         <div class="row">
             <div class="col-12 text-center pt-5">
                 <h1 class="display-one">
-                    {{ config('app.name')}}
+                    @lang('lang.my_blog')
                 </h1>
                 <hr>
                 <div class="row">

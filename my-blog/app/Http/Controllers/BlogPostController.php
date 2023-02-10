@@ -6,6 +6,7 @@ use App\Models\BlogPost;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
+use App\Models\Category;
 
 class BlogPostController extends Controller
 {
@@ -27,8 +28,13 @@ class BlogPostController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function create()
-    {
-        return view('blog.create');
+    {   
+        //$category =  new Category;
+        //$category = $category->selectCategory();
+
+        $category =  Category::selectCategory();
+
+        return view('blog.create', ['categories' => $category]);
     }
 
     /**
@@ -44,7 +50,8 @@ class BlogPostController extends Controller
             $newPost = BlogPost::create([
                 'title' => $request->title,
                 'body'  => $request->body,
-                'user_id' => Auth::user()->id
+                'user_id' => Auth::user()->id,
+                'categorys_id' => $request->categorys_id
             ]);
 
             return redirect(route('blog.show', $newPost->id));
@@ -71,7 +78,10 @@ class BlogPostController extends Controller
      */
     public function edit(BlogPost $blogPost)
     {
-        return view('blog.edit', ['blogPost' => $blogPost]);
+        $category =  Category::selectCategory();
+
+        return view('blog.edit', ['blogPost' => $blogPost, 
+                                'categories' => $category]);
     }
 
     /**

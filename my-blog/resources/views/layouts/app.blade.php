@@ -23,6 +23,8 @@
                 <a class="nav-link" href="{{route('blog.index')}}">Blogs</a>
                 <a class="nav-link" href="{{route('logout')}}">Logout</a>  
             @endguest
+            <a class="nav-link" href="{{route('lang', 'en')}}">En</a>
+            <a class="nav-link" href="{{route('lang', 'fr')}}">Fr</a>
         </div>
         </div>
     </div>
