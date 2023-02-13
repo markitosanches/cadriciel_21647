@@ -11,12 +11,12 @@
                 <div class="row">
                     <div class="col-md-8">
                         <p>
-                            Bonne lecture de nos articles
+                            @lang('lang.reading_title')
                         </p>
                     </div>
                     <div class="col-md-4">
                         <a href="{{ route('blog.create')}}" class="btn btn-outline-primary">
-                            Ajouter un article
+                            @lang('lang.add_post')
                         </a>
                     </div>
                 </div>

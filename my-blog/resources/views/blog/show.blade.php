@@ -10,7 +10,7 @@
             </h4>
             <hr>
             <p> {!! $blogPost->body !!}</p>
-            <p><strong>Category:</strong> {{ $blogPost->blogHasCategory->category}}</p>
+            <p><strong>Category:</strong> @isset($blogPost->blogHasCategory->category) {{ $blogPost->blogHasCategory->category }} @endisset</p>
             <p><strong>Author:</strong> {{ $blogPost->blogHasUser->name}}</p>
             <hr>
         </div>

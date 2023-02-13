@@ -34,6 +34,8 @@ class BlogPostController extends Controller
 
         $category =  Category::selectCategory();
 
+       // return  $category;
+
         return view('blog.create', ['categories' => $category]);
     }
 
