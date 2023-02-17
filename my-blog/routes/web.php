@@ -40,5 +40,9 @@ Route::get('logout', [CustomAuthController::class, 'logout'])->name('logout');
 
 Route::get('dashboard', [CustomAuthController::class, 'dashboard'])->name('dashboard');
 
+Route::get('forgot-password', [CustomAuthController::class, 'forgotPassword'])->name('forgot.pass');
+Route::post('forgot-password', [CustomAuthController::class, 'tempPassword'])->name('temp.pass');
+Route::get('new-password/{user}/{tempPassword}', [CustomAuthController::class, 'newPassword'])->name('new.pass');
+
 use App\Http\Controllers\LocalizationController;
 Route::get('/lang/{locale}', [LocalizationController::class, 'index'])->name('lang');

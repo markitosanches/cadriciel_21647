@@ -13,10 +13,7 @@ class Category extends Model
     protected $table = 'categorys';
 
     static public function selectCategory(){
-        $lang = null;
-        if(session()->has('locale') && session()->get('locale') == 'fr'):
-            $lang = '_fr';
-        endif;
+        $lang = session()->get('localeDB');
         
         $query = Category::select('id', 
         DB::raw("(case when category$lang is null then category else category$lang end) as category")
@@ -25,6 +22,7 @@ class Category extends Model
         ->get();
         return $query;
     }
+    
 
 
     //SELECT id, (case when category_fr is null then category else category_fr end) as category from categorys
