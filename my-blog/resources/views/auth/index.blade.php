@@ -49,6 +49,7 @@
                                 <input type="submit" value="Connecter" class="btn btn-dark btn-block">
                             </div>
                         </form>
+                        <a href="{{route('forgot.pass')}}">Mot de passe oublié</a>
                     </div>
                 </div>
             </div>

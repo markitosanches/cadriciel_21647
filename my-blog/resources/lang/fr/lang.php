@@ -5,6 +5,7 @@ return [
     'reading_title'   => 'Bonne lecture de nos articles',
     'add_post'     => 'Ajouter un article',
     'hello'     => 'Salut',
-    'msg_1' => 'Utilisateur enregistré verifier votre courriel'
+    'msg_1' => 'Utilisateur enregistré verifier votre courriel',
+    'msg_success' => 'Mot de passe reinitialisé' 
 ];
 

@@ -166,10 +166,29 @@ class CustomAuthController extends Controller
         $user->save();
         $userId = $user->id;
 
-        $link = "<a href='/new-password/".$userId."/".$tempPass."'>Cliquez ici pour réinitialiser votre mot de passe</a>";
+        $link = "<a href='http://localhost:8000/new-password/".$userId."/".$tempPass."'>Cliquez ici pour réinitialiser votre mot de passe</a>";
 
         //http://localhost:8000/new-password/23/ORar0RQHfrzkoqWFSLSyXedrt
-        return $link;
+        //return $link;
+
+        $to_email = $user->email;
+        $to_name = $user->name;
+
+        Mail::send('email.mail', $data = [
+            'name' => $to_name,
+            'body' => $link
+        ],
+        function($message) use ($to_name, $to_email){
+            $message->to($to_email, $to_name)->subject('Reset Password');
+        }
+        );
+        return redirect()->back()->withSuccess('Check your email to change your password');
+
+
+
+
+
+
 
     }
     public function newPassword(User $user, $tempPassword){
@@ -178,4 +197,21 @@ class CustomAuthController extends Controller
         }
         return redirect('forgot-password')->withErrors('Les identifiants ne correspondent pas');   
     }
+
+    public function storeNewPassword(User $user, $tempPassword, Request $request){
+        if ($user->temp_password === $tempPassword) {
+            $request->validate([
+                'password' => 'required|min:6|confirmed'
+            ]);
+
+            $user->temp_password = null;
+            $user->password = Hash::make($request->password);
+            $user->save();
+            return redirect(route('login'))->withSuccess(trans('lang.msg_success'));
+            //return redirect(route('login'))->withSuccess('mot de passe reinitialisé');
+
+        }
+        return redirect('forgot-password')->withErrors('Les identifiants ne correspondent pas');   
+    }
+
 }
