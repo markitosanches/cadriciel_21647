@@ -11,7 +11,7 @@ class BlogPost extends Model
 
     /*
     protected $table = 'Blog';
-    protected $primaryKey = "blog_id";
+    protected $primaryKey = "blog_id";  blogs  id
     */
 
     protected $fillable = [
